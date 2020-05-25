@@ -1,0 +1,112 @@
+$wallColor: rgb(128,128,128);
+$startColor: rgba(63, 195, 128, 1);
+$finishColor: rgba(255, 0, 0, 0.6);
+
+.node {
+    width: 2vw;
+    height: 3vh;
+    outline: 1px solid rgb(175, 216, 248);
+    display: inline-block;        
+    
+}
+
+.node-start {
+    background: $startColor;
+    animation-name: startNodeAnimation;
+    animation-duration: .5s;    
+    cursor: pointer;
+}
+
+.node-finish {
+    background: $finishColor;
+    animation-name: finishNodeAnimation;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    cursor: pointer;
+}
+
+.node-visited {
+    background: rgba(34, 167, 240, 1);
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+}
+
+.node-wall {
+    background-color: $wallColor;
+    animation-name: wallAnimation;
+    animation-duration: 0.1s;
+}
+
+@keyframes visitedAnimation {
+    0% {
+        background-color: rgba(63, 195, 128, 1);
+        transform: scale(0.2);
+        // background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+
+    100% {
+        // background-color: rgba(0, 0, 255, 0.692);
+        // background-color: red;        
+    }
+}
+
+@keyframes wallAnimation {
+    0% {
+        background-color: rgba(63, 195, 128, 1);
+        transform: scale(0.2);
+        // background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+
+    100% {
+        // background-color: rgba(0, 0, 255, 0.692);
+        // background-color: red;        
+    }
+}
+
+@keyframes startNodeAnimation {
+    0% {
+        background-color: $startColor;
+        transform: scale(0.8);
+        // background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 0%;
+    }
+}
+
+@keyframes finishNodeAnimation {
+    0% {
+        background-color: $finishColor;
+        transform: scale(0.8);
+        // background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 0%;
+    }
+}
+
+/* @keyframes visitedAnimation {
+    0% {
+        transform: scale(0.3);
+        background-color: rgba(0, 0, 66, 0.75);
+        border-radius: 100%;
+    }
+
+    50% {        
+        background-color: rgba(17, 104, 217, 0.75);
+    }
+
+    75% {
+        transform: scale(1.2);
+        background-color: rgba(0, 217, 159, 0.75);
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: rgba(0, 198, 218, 0.75)
+    }
+} */
+
+// @media only screen and (max-width: 1300px) {
+//     body {
+//       background-color: lightblue;
+//     }
+//   }

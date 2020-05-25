@@ -1,0 +1,144 @@
+$startColor: rgba(63, 195, 128, 1);
+$finishColor: rgba(255, 0, 0, 0.6);
+$black: black;
+$girdOutline: rgb(175, 216, 248);
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+// body {
+//     overflow: hidden; //hide scroll bar
+// }
+
+body {
+    font-family: "Avenir Next";
+}
+
+.grid {
+    // display: grid;    
+    // margin: 50px 0 0;  
+    margin-bottom: 50px;    
+    // height: 100%;
+    // width: 100%;        
+}
+
+.Collapsible {
+    // background-color: red;
+    // cursor: pointer;   
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	// border-radius:6px;
+    // border:1px solid #dcdcdc;
+    background: rgba(175, 216, 248, .30);
+
+    text-align: center;
+}
+
+.Collapsible__contentInner {
+    // cursor: pointer;       
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	// border-radius:6px;
+    // border:1px solid #dcdcdc;
+    background: rgba(175, 216, 248, .30);
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .start_text {
+        color: $startColor;   
+        font-size: 20px;        
+    }
+
+    .end_text {
+        color: $finishColor;
+        font-size: 20px;           
+    }   
+    
+    .regular_text {
+        color: $black;     
+        font-size: 20px;   
+    }
+
+    
+    text-align: left;
+}
+
+// .Collapsible__contentOuter, .algo {
+//     // text-align: left;
+// }
+
+.Collapsible__trigger, .algo {
+    text-align: center;
+}
+
+.Collapsible__contentOuter, .algo {
+    text-align: center;
+}
+
+//Help text
+.Collapsible__trigger {
+    margin: 12px;
+    margin-bottom: 12px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+
+.Collapsible__trigger:hover {
+    background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+
+.content {
+    // padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;    
+}
+
+
+.button {    
+    margin: 12px;
+    margin-bottom: 12px;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
