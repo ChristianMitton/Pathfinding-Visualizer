@@ -21,6 +21,8 @@ let dijkstra = require('../algorithms/dijkstra').default;
 let generateMaze = require('../algorithms/mazeGeneration').default;
 let copyObjects = require('../algorithms/copyObjects').default;
 
+let mazePattern = require('../mazePatterns').default
+
 let DEFAULT_START_NODE_ROW = 10;
 let DEFAULT_START_NODE_COL = 18;
 let DEFAULT_FINISH_NODE_ROW = 10;
@@ -45,11 +47,13 @@ class PathFinder extends Component {
 
     componentDidMount() {
         // create grid when component is first rendered
-        const grid = this.createDefaultGrid();
+        let grid = this.createDefaultGrid();        
+
+        grid = this.createMazeTemplate(grid);
         
         this.setState({
             grid: grid
-        });
+        });    
     }
 
     clear(){
@@ -62,8 +66,21 @@ class PathFinder extends Component {
 
     stopAlgorithm(){
         // this.setState({ state: this.state })  
-        // window.location.reload(false)                      
-        window.location.reload()                      
+        // window.location.reload(false)                   
+
+                       
+        // let grid = this.createDefaultGrid();        
+
+        // grid = this.createMazeTemplate(grid);
+        
+        // this.setState({
+        //     grid: grid
+        // });                            
+
+        // this.forceUpdate()
+
+        window.location.reload()  
+        
     }
 
     //when mouse button is pressed
@@ -249,52 +266,14 @@ class PathFinder extends Component {
                 Create Maze
             </button> */}    
             <Collapsible trigger="Help" className="help">
-                <p className="start_text">• Green = start</p>
-                <p className="end_text">• Red = finish</p>
-                <p className="regular_text">• Clear = remove walls / visited nodes ( If algorithm is in mid execution, algorithm will continue running after clear )</p>
-                <p className="regular_text">• Click and drag on grid to create walls</p>
-                <p className="regular_text">• After running an algorithm, if you click another algorithm and it does not animate, click the 'restart' button</p>                          
+                <p className="start_text">• Green = start. Click and drag to change position.</p>
+                <p className="end_text">• Red = finish. Click and drag to change position.</p>
+                <p className="regular_text">• Clear Walls = remove walls / visited nodes ( If algorithm is in mid execution, algorithm will continue running after clear )</p>
+                <p className="regular_text">• Click and drag on grid to create walls</p>                
             </Collapsible>
 
             <Collapsible trigger="Algorithm Guide" className="algo">
-                <Collapsible trigger="Breadth First Search ( BFS )">    
-                <div className="regular_text">                
-                    <p>
-                    <h1>Summary</h1>
-                    BFS is an algorithm that, starting at a root node, visits all of that root's neighbors. Neighbors are also nodes, and 'root' is just a name for the starting node. After visiting all the neighbors of
-                    the root, it visits all the neighbors of the root's neighbors. This pattern continues in a recursive fashion until eventually, the target node is a neighbor.                    
-                    </p>
-                    <p>                    
-                    This behavior, similar to dropping a rock in a pond and having the ripples expand outward, is captured programmatically through the use of a queue.
-                    </p>
-                    <p>
-                    <h1>How it Works</h1>
-                    A node (beginning with the root node) is enqueued into a queue. While the queue is not empty, the node that is next in line is dequeued from the queue, and then each of that nodes
-                    neighbors is enqueued into the queue. A check is performed to see if at any point a neighbor is the target node.
-                    </p>
-                </div>
-                    
-                </Collapsible>
-                <Collapsible trigger="Depth First Search ( DFS )">
-                <div className="regular_text">                
-                    <p>
-                    <h1>Summary</h1>
-                    DFS is an algorithm that, starting at a root node, picks a single neighbor. A neighbor is also a node, and 'root' is just a name for the starting node. After picking one neighbor of the root, it picks
-                    a single neighbor of the roots neighbor. The idea is to pick a single route, and to go as far down that route as possible. After reaching the end of that route, it starts at the beginning and then 
-                    picks another unvisited route.
-                    </p>
-                    <p>                    
-                    Similar to driving as far down a road as possible, reversing and then going as far as you can down another road until you visit all the roads in your neighborhood
-                    , this behavior is captured programmatically through the use of recursion programming.
-                    </p>
-                    <p>
-                    <h1>How it Works</h1>
-                    Iterate through all the neighbors of a node (beginning with the root node) in a DFS function that accepts a root as a parameter. For each neighbor, call DFS again with that 
-                    neighbor passed as the root. Continually check if the root is the target node.                     
-                    </p>
-                </div>
-                </Collapsible>
-                <Collapsible trigger="A* ( A star )">
+            <Collapsible trigger="A* ( A star )">
                 <div className="regular_text">                
                     <p>
                         <h1>Summary</h1>
@@ -345,6 +324,44 @@ class PathFinder extends Component {
                     </p>  
                 </div>
                 </Collapsible>
+                <Collapsible trigger="Breadth First Search ( BFS )">    
+                <div className="regular_text">                
+                    <p>
+                    <h1>Summary</h1>
+                    BFS is an algorithm that, starting at a root node, visits all of that root's neighbors. Neighbors are also nodes, and 'root' is just a name for the starting node. After visiting all the neighbors of
+                    the root, it visits all the neighbors of the root's neighbors. This pattern continues in a recursive fashion until eventually, the target node is a neighbor.                    
+                    </p>
+                    <p>                    
+                    This behavior, similar to dropping a rock in a pond and having the ripples expand outward, is captured programmatically through the use of a queue.
+                    </p>
+                    <p>
+                    <h1>How it Works</h1>
+                    A node (beginning with the root node) is enqueued into a queue. While the queue is not empty, the node that is next in line is dequeued from the queue, and then each of that nodes
+                    neighbors is enqueued into the queue. A check is performed to see if at any point a neighbor is the target node.
+                    </p>
+                </div>
+                    
+                </Collapsible>
+                <Collapsible trigger="Depth First Search ( DFS )">
+                <div className="regular_text">                
+                    <p>
+                    <h1>Summary</h1>
+                    DFS is an algorithm that, starting at a root node, picks a single neighbor. A neighbor is also a node, and 'root' is just a name for the starting node. After picking one neighbor of the root, it picks
+                    a single neighbor of the roots neighbor. The idea is to pick a single route, and to go as far down that route as possible. After reaching the end of that route, it starts at the beginning and then 
+                    picks another unvisited route.
+                    </p>
+                    <p>                    
+                    Similar to driving as far down a road as possible, reversing and then going as far as you can down another road until you visit all the roads in your neighborhood
+                    , this behavior is captured programmatically through the use of recursion programming.
+                    </p>
+                    <p>
+                    <h1>How it Works</h1>
+                    Iterate through all the neighbors of a node (beginning with the root node) in a DFS function that accepts a root as a parameter. For each neighbor, call DFS again with that 
+                    neighbor passed as the root. Continually check if the root is the target node.                     
+                    </p>
+                </div>
+                </Collapsible>
+                
                 <Collapsible trigger="Dijkstra">
                     <div className="regular_text"> 
                         <p>
@@ -366,20 +383,20 @@ class PathFinder extends Component {
                 </Collapsible>
                 {/*  */}
             </Collapsible>
-            <button onClick={() => this.visualizeBFS()} className="button">
-                Visualize Breadth First Search Algorithm
-            </button>            
-            <button onClick={() => this.visualizeDFS()} className="button">
-                Visualize Depth First Search Algorithm
-            </button>
             <button onClick={() => this.visualizeAStar()} className="button">
                 Visualize A*
+            </button>
+            <button onClick={() => this.visualizeBFS()} className="button">
+                Visualize BFS
+            </button>            
+            <button onClick={() => this.visualizeDFS()} className="button">
+                Visualize DFS
             </button>            
             <button onClick={() => this.visualizeDijkstra()} className="button">
                 Visualize Dijkstra's
             </button>
             <button onClick={() => this.clear()} className="button">
-                Clear
+                Clear Walls
             </button>
             <button onClick={() => this.stopAlgorithm()} className="button">
                 Restart
@@ -431,6 +448,48 @@ class PathFinder extends Component {
             //! At this point, each index contains a graphNode
         }
         return grid;
+    }
+
+    readTextFile(file){
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function (){
+            if(rawFile.readyState === 4){
+                if(rawFile.status === 200 || rawFile.status == 0){
+                    var allText = rawFile.responseText;
+                    alert(allText);
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+    
+    createMazeTemplate(newGrid){
+        // let grid = this.state.grid        
+        // this.readTextFile("file:///Users/chrismitton/Desktop/new_pathfinding_visualizer/src/mazeNodes.txt")
+        // let file=fopen(getScriptPath(),0);
+        // fetch('../mazeNodes.txt')
+        //     .then((r) => r.text())
+        //     .then(text  => {
+        //         console.log(text);
+        // })          
+
+        // console.log('newGrid: ' + newGrid)
+
+        let coordinates = mazePattern.split('-')
+        coordinates.forEach((c) => {
+            let pair = c.split(',')
+            let x = parseInt(pair[0])
+            let y = parseInt(pair[1])
+                    
+            // console.log(x,y)
+            newGrid[x][y].isWall = true            
+          });
+
+        // console.log(coordinates)
+        return newGrid
+
     }
 
     getNewGridWithWallToggled(grid, row, col){
